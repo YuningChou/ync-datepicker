@@ -1,0 +1,48 @@
+.ync-datepicker-wrapper{
+    width:240px;
+    font-size:16px;
+    box-shadow: 0px 1px 2px 2px rgba(0,0,0,.3);
+}
+.ync-datepicker-wrapper .ync-datepicker-header{
+    padding : 0 10px;
+    height: 50px;
+    line-height: 50px;
+    text-align : center;
+    background: #dc3545;
+    color:white;
+}
+.ync-datepicker-wrapper .ync-datepicker-btn{
+    font-family: serif;
+    font-size: 26px;
+    width:20px;
+    height:50px;
+    line-height: 50px;
+    color: #035c44;
+    text-align: center;
+    cursor:pointer;
+    text-decoration: none;
+}
+.ync-datepicker-wrapper .ync-datepicker-prev-btn{
+    float:left;
+}
+.ync-datepicker-wrapper .ync-datepicker-next-btn{
+    float:right;
+}
+.ync-datepicker-wrapper .ync-datepicker-body table{
+    width:100%;
+    border-collapse:collapse;
+}
+.ync-datepicker-wrapper .ync-datepicker-body table th,
+.ync-datepicker-wrapper .ync-datepicker-body table td{
+    height:30px;
+    text-align: center;
+}
+.ync-datepicker-wrapper .ync-datepicker-body table th{
+    font-size: 12px;
+    height:40px;
+    line-height: 40px;
+}
+.ync-datepicker-wrapper .ync-datepicker-body table td{
+    font-size:10px;
+    cursor: pointer;
+}
