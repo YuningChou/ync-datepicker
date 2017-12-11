@@ -7,76 +7,29 @@
     <title>ync-datepicker</title>
     <link rel="stylesheet" href="style.css">
 </head>
+<style>
+    .datepicker{
+        border:1px solid #ccc;
+        border-radius:3px;
+        padding:5px;
+        height:24px;
+        line-height: 24px;
+        width:230px
+    }      
+    .datepicker:focus{
+        outline: 0 none;
+        border:1px solid #035c44;
+    } 
+</style>
 <body>
-    <div class="ync-datepicker-wrapper">
-        <div class="ync-datepicker-header">
-            <a href="#" class="ync-datepicker-btn ync-datepicker-prev-btn">&lt;</a>
-            <a href="#" class="ync-datepicker-btn ync-datepicker-next-btn">&gt;</a>
-            <span class="ync-datepicker-curr-month">2017-12</span>
-        </div>
-        <div class="ync-datepicker-body">
-            <table>
-                <thead>
-                    <tr>
-                        <th>一</th>
-                        <th>二</th>
-                        <th>三</th>
-                        <th>四</th>
-                        <th>五</th>
-                        <th>六</th>
-                        <th>日</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>27</td>
-                        <td>28</td>
-                        <td>29</td>
-                        <td>30</td>
-                        <td>1</td>
-                        <td>2</td>
-                        <td>3</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>5</td>
-                        <td>6</td>
-                        <td>7</td>
-                        <td>8</td>
-                        <td>9</td>
-                        <td>10</td>
-                    </tr>
-                    <tr>
-                        <td>11</td>
-                        <td>12</td>
-                        <td>13</td>
-                        <td>14</td>
-                        <td>15</td>
-                        <td>16</td>
-                        <td>17</td>
-                    </tr>
-                    <tr>
-                        <td>18</td>
-                        <td>19</td>
-                        <td>20</td>
-                        <td>21</td>
-                        <td>22</td>
-                        <td>23</td>
-                        <td>24</td>
-                    </tr>
-                    <tr>
-                        <td>25</td>
-                        <td>26</td>
-                        <td>27</td>
-                        <td>38</td>
-                        <td>29</td>
-                        <td>30</td>
-                        <td>31</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+    <input type="text" class="datepicker" />
+    
 
-    </div>
+
+    <script type="text/javascript" src="data.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+    <script>
+        datepicker.init('.datepicker');
+    </script>
 </body>
 </html>
