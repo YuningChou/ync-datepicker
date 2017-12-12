@@ -1,7 +1,10 @@
 (function(){
     var datepicker = window.datepicker;
+    var monthData;
+    var $wrapper;
+
     datepicker.buildUi = function(year,month){
-        var monthData = datepicker.getMonthData(year,month);
+        monthData = datepicker.getMonthData(year,month);
 
         //日曆html結構
         var html = '<div class="ync-datepicker-header">' +
@@ -30,7 +33,7 @@
                     //i被7整除是一週的第一天
                     html += '<tr>';
                 }
-                html += '<td>' + date.showDate + '</td>';
+                html += '<td data-date=" ' + date.date +' ">' + date.showDate + '</td>';
                 if(i%7 === 6){
                     //i被7除的時候餘6則是一週的最後一天
                     html += '</tr>';
@@ -44,12 +47,96 @@
     return html;
 
     };
-    //內容放到頁面顯示
-    datepicker.init = function($input){
-        var html = datepicker.buildUi();
-        var $wrapper = document.createElement('div');
-        $wrapper.className = 'ync-datepicker-wrapper';
+
+    datepicker.render = function(direction){
+        var year,month;
+        
+        if(monthData){
+            year = monthData.year;
+            month = monthData.month;
+        }
+
+        if(direction === 'prev') month--;
+        if(direction === 'next') month++;
+
+        var html = datepicker.buildUi(year,month);
+
+        $wrapper = document.querySelector('.ync-datepicker-wrapper');
+        
+        if(!$wrapper){
+            $wrapper = document.createElement('div');
+            document.body.appendChild($wrapper);
+            $wrapper.className = 'ync-datepicker-wrapper';
+        }
         $wrapper.innerHTML = html;
-        document.body.appendChild($wrapper);
     };
+
+
+    //內容放到頁面顯示
+    datepicker.init = function(input){
+        datepicker.render();
+
+        //2017-12-12增加點擊展開收起事件
+        var $input = document.querySelector(input);
+        var isOpen = false;
+        
+        $input.addEventListener('click',function(){
+            if(isOpen){
+                $wrapper.classList.remove('ync-datepicker-wrapper-show');
+                isOpen = false;
+            }else{
+                $wrapper.classList.add('ync-datepicker-wrapper-show');
+                // 計算input與日曆的位置
+                var left = $input.offsetLeft;
+                var top = $input.offsetTop;
+                var height =  $input.offsetHeight;
+                $wrapper.style.top =  top + height + 2 + 'px';
+                $wrapper.style.left = left + 'px';
+                isOpen = true;
+            }
+        }, false);
+        $wrapper.addEventListener('click',function(e){
+            var $target = e.target;
+            if(!$target.classList.contains('ync-datepicker-btn'))
+                return;
+
+            
+            if($target.classList.contains('ync-datepicker-prev-btn')){
+                datepicker.render('prev');
+
+            }else if($target.classList.contains('ync-datepicker-next-btn'))
+                datepicker.render('next');
+
+        },false);
+
+        $wrapper.addEventListener('click',function(e){
+            var $target = e.target;
+            if($target.tagName.toLowerCase() !== 'td') return;
+
+            var date = new Date(monthData.year,monthData.month - 1,$target.dataset.date);
+
+            $input.value = format(date);
+            
+            $wrapper.classList.remove('ync-datepicker-wrapper-show');
+            isOpen = false;
+
+        },false);
+
+    };
+    //日期格式化
+    function format(date){
+        ret = '';
+        var padding = function(num){
+            if(num <= 0){
+            return '0' + num;
+            }
+            return num;
+        }
+
+        ret += date.getFullYear() + '/';
+        ret += padding(date.getMonth() + 1) + '/';
+        ret += padding(date.getDate());
+
+        return ret;
+    }
 })();
