@@ -47,7 +47,7 @@
     return html;
 
     };
-
+    //提取要用來放到頁面裡的資料
     datepicker.render = function(direction){
         var year,month;
         
